@@ -1,0 +1,4 @@
+Scrapy==2.4.0
+scrapy-selenium-middleware==0.0.5
+selenium==3.141.0
+selenium-wire==2.1.1
