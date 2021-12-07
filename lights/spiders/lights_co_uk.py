@@ -77,18 +77,13 @@ class LightsCoUkSpider(scrapy.Spider):
         files = list()
         pdfs = response.meta['pdf']
         videos = response.meta['video']
-        
+        files = response.css('div.swiper-wrapper').css('picture').css('source[type="image/jpeg"]::attr(data-srcset)').extract()
         if pdfs is not None:
               files.append(response.urljoin(pdfs))
         
         if videos is not None:
               files.append(response.urljoin(videos))
-        
-        pictures = response.css('div.swiper-wrapper').css('picture').css('source[type="image/jpeg"]::attr(data-srcset)').extract()
-        
-        if len(pictures) > 0:
-              for picture in response.css('div.swiper-wrapper').css('picture').css('source[type="image/jpeg"]::attr(data-srcset)').extract():
-                  files.append(picture)
+
         if response.status == 200:
            item['file_urls'] = files
         return item
