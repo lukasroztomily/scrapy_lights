@@ -1,6 +1,6 @@
 # scrapy_lights
 
-Účelem skriptu je stahnout z webu https://www.lights.co.uk/innr-smart-outdoor-led-ground-spike-light-rgbw-3x.html obrázky, video a dokument. 
+Účelem skriptu je stahnout z webu https://www.lights.co.uk/philips-hue-white-color-impress-led-pillar-light.htmll obrázky, video a dokument. 
 
 Skript je napsaný v programu python3.8. Využívá moduly **scrapy** a **selenium**. Proto je nutné si před spuštěním skriptu nainstalovat tyto moduly.
 Závislosti jsou definované v sobouru **requirements.txt**, který se spouští ```pip install -r requirements.txt```
