@@ -6,6 +6,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.chrome.options import Options
 from lights.items import LightsItem
 
 class LightsCoUkSpider(scrapy.Spider):
@@ -13,6 +14,7 @@ class LightsCoUkSpider(scrapy.Spider):
     start_urls = ['https://www.lights.co.uk/philips-hue-white-color-impress-led-pillar-light.html']
     
     def __init__(self):
+
         base = os.path.dirname(__file__)
         
         if platform.system() == 'Windows':
@@ -30,8 +32,10 @@ class LightsCoUkSpider(scrapy.Spider):
         
         self.PATH = os.path.join(base, 'drivers', driver)
         self.urls_ = self.start_urls[0]
-        self.driver = webdriver.Chrome(self.PATH)
-        self.driver.minimize_window()
+        options = Options()
+        options.add_argument('--headless')
+        options.add_argument('--disable-gpu')
+        self.driver = webdriver.Chrome(self.PATH, options=options)
         self.driver.get(self.urls_)
 
     def parse(self, response):
@@ -63,7 +67,6 @@ class LightsCoUkSpider(scrapy.Spider):
         try:
           if video is not None:
              self.driver.get(video)
-             self.driver.minimize_window()
              videolink = self.driver.find_element(By.TAG_NAME, 'source').get_attribute('src')
           else:
              videolink = None
