@@ -31,6 +31,7 @@ class LightsCoUkSpider(scrapy.Spider):
         self.PATH = os.path.join(base, 'drivers', driver)
         self.urls_ = self.start_urls[0]
         self.driver = webdriver.Chrome(self.PATH)
+        self.driver.minimize_window()
         self.driver.get(self.urls_)
 
     def parse(self, response):
@@ -62,6 +63,7 @@ class LightsCoUkSpider(scrapy.Spider):
         try:
           if video is not None:
              self.driver.get(video)
+             self.driver.minimize_window()
              videolink = self.driver.find_element(By.TAG_NAME, 'source').get_attribute('src')
           else:
              videolink = None
